@@ -76,8 +76,8 @@ public class GaacMemberController {
 		if (result.hasErrors()) {
 			return new ModelAndView();
 		}
-		System.out.println("Saida: " + gaacMember.getLeaving());
-		if (gaacMember.getLeaving() != null) {
+		
+		/*if (gaacMember.getLeaving() != null) {
 			if (gaacMember.getLeaving().booleanValue()) {
 				gaacMember.setRestart(Boolean.valueOf(false));
 				gaacMember.setRestartDate(null);
@@ -85,12 +85,14 @@ public class GaacMemberController {
 				gaacMember.setReasonLeaving(null);
 				gaacMember.setEndDate(null);
 			}
-		}
+		}*/
+		
 		if ((gaacMember.getRestart() != null)
 				&& (gaacMember.getRestart().booleanValue())) {
 			gaacMember.setLeaving(Boolean.valueOf(false));
 			gaacMember.setReasonLeaving(null);
 			gaacMember.setEndDate(null);
+			log.debug("RESTART IS TRUE AND RESTART DATE IS"+gaacMember.getRestartDate());
 		}
 
 		service.saveGaacMember(gaacMember);

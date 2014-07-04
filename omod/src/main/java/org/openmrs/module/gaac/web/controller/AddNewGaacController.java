@@ -88,9 +88,11 @@ public class AddNewGaacController {
 			member.setMember(gaac.getFocalPatient());
 			member.setDescription(gaac.getDescription());
 			if (gaac.getMembers() == null)
-				gaac.setMembers(new HashSet());
+				gaac.setMembers(new HashSet<GaacMember>());
 			gaac.getMembers().add(member);
 		}
+
+		// Desintegrar
 
 		if ((gaac.getCrumbled() != null) && (gaac.getCrumbled().booleanValue())) {
 			for (GaacMember member : gaac.getMembers()) {
@@ -99,7 +101,43 @@ public class AddNewGaacController {
 						.getReasonLeavingGaacType(Integer.valueOf(5)));
 				member.setEndDate(gaac.getDateCrumbled());
 			}
+			gaac.setEndDate(gaac.getDateCrumbled());
 
+		}
+
+		// Reintegar
+
+		if (gaac.getCrumbled() != null && (!gaac.getCrumbled().booleanValue())) {
+			gaac.setEndDate(null);
+			gaac.setReasonCrumbled(null);
+			gaac.setDateCrumbled(null);
+			for (GaacMember member : gaac.getMembers()) {
+				if (member.getReasonLeaving().getId() == 5) {
+					member.setLeaving(false);
+					member.setReasonLeaving(null);
+					member.setEndDate(null);
+				}
+			}
+		}
+
+		// Anular
+		if ((gaac.getVoided() != null) && (gaac.getVoided().booleanValue())) {
+			for (GaacMember member : gaac.getMembers()) {
+				member.setVoided(true);
+				member.setVoidedBy(gaac.getVoidedBy());
+				member.setVoidReason(gaac.getVoidReason());
+				member.setDateVoided(gaac.getDateVoided());
+			}
+		}
+
+		// Desanular
+		if ((gaac.getVoided() != null) && (!gaac.getVoided().booleanValue())) {
+			for (GaacMember member : gaac.getMembers()) {
+				member.setVoided(false);
+				member.setVoidedBy(null);
+				member.setVoidReason(null);
+				member.setDateVoided(null);
+			}
 		}
 
 		service.saveGaac(gaac);

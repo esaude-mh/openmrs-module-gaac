@@ -21,11 +21,20 @@
 
 <script type="text/javascript">
 	function confirmPurge() {
-		if (confirm("Are you sure you want to purge this object? It will be permanently removed from the system.")) {
+		if (confirm("Tem certeza que pretende apagar este membro? Será permanentemente eliminado")) {
 			return true;
 		} else {
 			return false;
 		}
+	}
+	
+	
+	function validate() {
+		if (document.getElementById("startDate").value=='') {
+			confirm("Preencha a data de inicio")
+			return false;
+		}
+		return true;
 	}
 
 	function voidedClicked(input) {
@@ -98,7 +107,7 @@
 				<td align="right"><spring:message code="gaac.manage.startDate" /></td>
 				<td><spring:bind path="gaacMember.startDate">
 						<input type="text" name="startDate" size="10" value="${status.value}"
-					onClick="showCalendar(this)" />	
+					onClick="showCalendar(this)" id="startDate"/>	
 					  	<c:if test="${status.errorMessage != ''}">
 							<span class="error">${status.errorMessage}</span>
 						</c:if>
@@ -163,6 +172,9 @@
 						</spring:bind></td>
 				</tr>
 				
+				
+				<c:if test="${gaacMember.leaving==true}">
+				
 				<tr>
 					<td align="right"><spring:message code="gaac.member.restart" /></td>
 					<td><spring:bind path="gaacMember.restart">
@@ -174,8 +186,7 @@
 								<span class="error">${status.errorMessage}</span>
 							</c:if>
 						</spring:bind></td>
-				</tr>
-				
+				</tr>				
 				<tr id="restartDate1">
 					<td align="right"><spring:message code="gaac.member.restartDate" /></td>
 					<td><spring:bind path="gaacMember.restartDate">
@@ -185,7 +196,8 @@
 								<span class="error">${status.errorMessage}</span>
 							</c:if>
 						</spring:bind></td>
-				</tr>			
+				</tr>
+				</c:if>			
 				
 				<tr>
 					<td align="right"><spring:message code="general.voided" /></td>
@@ -199,6 +211,7 @@
 							</c:if>
 						</spring:bind></td>
 				</tr>
+				
 				
 				<tr id="voidReason">
 					<td align="right"><spring:message code="general.voidReason" /></td>
@@ -223,7 +236,7 @@
 		<input type="hidden" name="gaacMemberId:int"
 			value="${gaacMember.gaacMemberId}"> <br /> <input
 			type="submit" value="<spring:message code="gaac.member.save"/>"
-			name="save" />
+			name="save" onclick ="validate()"/>
 	</fieldset>
 </form>
 <br />

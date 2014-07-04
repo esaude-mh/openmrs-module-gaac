@@ -1,5 +1,7 @@
 package org.openmrs.module.gaac.validator;
 
+import java.util.Date;
+
 import org.openmrs.module.gaac.Gaac;
 import org.openmrs.module.gaac.GaacUtils;
 import org.openmrs.module.gaac.api.GaacService;
@@ -35,6 +37,11 @@ public class GaacValidator implements Validator {
 				if (temp != null)
 					errors.rejectValue("gaacIdentifier",
 							"gaac.error.identifier.inuse");
+			}
+			
+			if(gaac.getCrumbled()!=null && gaac.getCrumbled() && gaac.getDateCrumbled().after(new Date())){
+				errors.rejectValue("dateCrumbled",
+						"gaac.manage.error.DateCrumbled");
 			}
 		}
 	}

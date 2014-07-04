@@ -1,5 +1,7 @@
 package org.openmrs.module.gaac.validator;
 
+import java.util.Date;
+
 import org.openmrs.module.gaac.GaacMember;
 import org.openmrs.module.gaac.GaacUtils;
 import org.openmrs.module.gaac.api.GaacService;
@@ -20,8 +22,6 @@ public class GaacMemberValidator implements Validator {
 		} else {
 			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "startDate",
 					"gaac.member.error.startDate");
-			ValidationUtils.rejectIfEmptyOrWhitespace(errors, "description",
-					"error.description");
 			if (member.getGaacMemberId() == null) {
 				GaacService gs = GaacUtils.getService();
 				GaacMember temp = gs.getGaacMemberByMember(member.getMember());
@@ -34,6 +34,11 @@ public class GaacMemberValidator implements Validator {
 							.getStartDate()))) {
 				errors.rejectValue("startDate",
 						"gaac.member.error.startDateAfterGaac");
+			}
+			if(member.getLeaving()!=null && member.getLeaving() && member.getEndDate().after(new Date())){
+				errors.rejectValue("endDate",
+						"gaac.member.error.startDateAfterGaac");
+				
 			}
 
 			
