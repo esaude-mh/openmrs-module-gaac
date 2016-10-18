@@ -22,9 +22,10 @@
 	</organization>
 
 	<scm>
-		<connection>scm:svn:https://svn.openmrs.org/openmrs-modules/gaac/trunk/</connection>
-		<developerConnection>scm:svn:https://svn.openmrs.org/openmrs-modules/gaac/trunk/</developerConnection>
-		<url>https://svn.openmrs.org/openmrs-modules/gaac/trunk/</url>
+		<connection>scm:git:https://github.com/esaude/openmrs-module-gaac.git</connection>
+		<developerConnection>scm:git:https://github.com/esaude/openmrs-module-gaac.git</developerConnection>
+		<url>https://github.com/esaude/openmrs-module-gaac</url>
+		<tag>HEAD</tag>
 	</scm>
 
 	<modules>
