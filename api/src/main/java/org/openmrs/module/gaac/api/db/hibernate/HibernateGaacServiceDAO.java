@@ -25,6 +25,7 @@ import org.hibernate.criterion.Order;
 import org.openmrs.Location;
 import org.openmrs.Patient;
 import org.openmrs.api.db.DAOException;
+import org.openmrs.api.db.hibernate.DbSessionFactory;
 import org.openmrs.module.gaac.AffinityType;
 import org.openmrs.module.gaac.Gaac;
 import org.openmrs.module.gaac.GaacMember;
@@ -37,20 +38,20 @@ import org.openmrs.module.gaac.api.db.GaacServiceDAO;
 public class HibernateGaacServiceDAO implements GaacServiceDAO {
 	protected final Log log = LogFactory.getLog(this.getClass());
 
-	private SessionFactory sessionFactory;
+	private DbSessionFactory sessionFactory;
 
 	/**
 	 * @param sessionFactory
 	 *            the sessionFactory to set
 	 */
-	public void setSessionFactory(SessionFactory sessionFactory) {
+	public void setSessionFactory(DbSessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}
 
 	/**
 	 * @return the sessionFactory
 	 */
-	public SessionFactory getSessionFactory() {
+	public DbSessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
 

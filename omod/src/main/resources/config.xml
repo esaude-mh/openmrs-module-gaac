@@ -15,7 +15,7 @@
 	<require_version>${openMRSVersion}</require_version>
 	<!-- / Module Properties -->
 	<aware_of_modules>
-			    <aware_of_module>org.openmrs.module.legacyui</aware_of_module>
+		<aware_of_module>org.openmrs.module.legacyui</aware_of_module>
 	</aware_of_modules>
 	
 	<!-- Module Activator -->
@@ -25,7 +25,7 @@
 	<!-- Adds link to admin page -->
 	<extension>
 		<point>org.openmrs.admin.list</point>
-		<class>${project.parent.groupId}.${project.parent.artifactId}.extension.html.AdminList</class>
+		<class>org.openmrs.module.gaac.extension.html.AdminList</class>
 	</extension>
 	
 	
